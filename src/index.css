@@ -1,0 +1,434 @@
+/* THE LAST WEBSITE - Core Architectural Stylesheet */
+
+:root {
+  /* Color Palette - Restrained Editorial */
+  --bg-primary: #0a0a0a;
+  --bg-subtle: #121212;
+  --text-primary: #f4f1ea;
+  --text-secondary: #888580;
+  --text-muted: #4a4845;
+  --accent: #bf3b2b; /* Restrained Vermilion */
+  --border-color: rgba(244, 241, 234, 0.12);
+  --grid-line: rgba(244, 241, 234, 0.04);
+  --accent-glow: rgba(191, 59, 43, 0.2);
+
+  /* Fonts */
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', 'Space Mono', monospace;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing & Fluid Typography */
+  --space-unit: clamp(1rem, 2vw, 2.5rem);
+  --container-pad: clamp(1.25rem, 4vw, 4rem);
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
+}
+
+/* Light / Inverted Theme state */
+[data-theme="paper"] {
+  --bg-primary: #f2efea;
+  --bg-subtle: #e6e2d9;
+  --text-primary: #0f0f0e;
+  --text-secondary: #6e6b66;
+  --text-muted: #a6a29a;
+  --accent: #aa2c1d;
+  --border-color: rgba(15, 15, 14, 0.15);
+  --grid-line: rgba(15, 15, 14, 0.05);
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.8s var(--ease-out-expo), color 0.8s var(--ease-out-expo);
+  cursor: default;
+}
+
+/* Custom Scrollbar - Extremely Subtle */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Base Typography Classes */
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* Screen Structure */
+.viewport-screen {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: var(--container-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+/* Top Navigation Bar */
+.top-meta-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: clamp(1rem, 2vw, 1.75rem) var(--container-pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.top-meta-bar > * {
+  pointer-events: auto;
+}
+
+.brand-mark {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.date-mark {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.sound-toggle-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1vw, 0.75rem);
+  padding: 0.35rem 0.75rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0px;
+}
+
+.sound-toggle-btn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.sound-toggle-btn.active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Scene Layout Frames */
+.scene-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(4rem, 10vh, 7rem) 0 clamp(2rem, 5vh, 4rem) 0;
+}
+
+/* Hero Typography */
+.monumental-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 8vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-style: normal;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.subordinate-heading {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+}
+
+/* Bottom Meta Footer in Scenes */
+.scene-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  padding-top: 2rem;
+  border-top: 1px solid var(--grid-line);
+}
+
+.indicator-pulse {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  animation: blink 2s infinite ease-in-out;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* Scene 02 Interactive Terms Layout */
+.deconstruct-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  width: 100%;
+  margin-top: clamp(2rem, 5vh, 4rem);
+}
+
+.deconstruct-word {
+  position: relative;
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+  user-select: none;
+  padding: 0.5rem 0;
+}
+
+.deconstruct-word:hover, .deconstruct-word.active {
+  color: var(--text-primary);
+  transform: translateX(8px);
+}
+
+.deconstruct-word .word-num {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1vw, 0.75rem);
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.deconstruct-word .word-desc {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1vw, 0.8rem);
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.deconstruct-word:hover .word-desc, .deconstruct-word.active .word-desc {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* Scene 03 Spatial Container */
+.spatial-perspective-box {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.spatial-typography-layer {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 10vw, 9rem);
+  text-align: center;
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* Scene 04 Telemetry Box */
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  border: 1px solid var(--border-color);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background-color: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(2px);
+  margin-top: 2rem;
+}
+
+.telemetry-item {
+  font-family: var(--font-mono);
+}
+
+.telemetry-label {
+  font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.telemetry-value {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  color: var(--text-primary);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.telemetry-value.accented {
+  color: var(--accent);
+}
+
+/* Scene 05 Epilogue & Digital Mark */
+.epilogue-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  align-items: center;
+}
+
+.stamp-btn {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  padding: 1rem 2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  border-radius: 0px;
+  font-weight: 500;
+}
+
+.stamp-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  padding: 1rem 2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0px;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--text-primary);
+}
+
+.digital-stamp-badge {
+  border: 1px dashed var(--accent);
+  padding: 1.5rem;
+  background-color: var(--bg-subtle);
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  color: var(--text-primary);
+  margin-top: 2rem;
+  animation: fadeIn 0.8s var(--ease-out-expo);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .viewport-screen {
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .scene-container {
+    padding: 5rem 0 2rem 0;
+  }
+  
+  .monumental-heading {
+    word-break: break-word;
+  }
+
+  .scene-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .deconstruct-word:hover, .deconstruct-word.active {
+    transform: translateX(4px);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
